@@ -1,0 +1,13 @@
+{
+    "name": "zeshan77/activity-monitor",
+    "description": "Monitor your eloquent model activities",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "'Zeshan Khattak'",
+            "email": "zeshan77@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
