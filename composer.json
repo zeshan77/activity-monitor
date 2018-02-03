@@ -8,5 +8,10 @@
             "email": "zeshan77@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Zeshan77\\ActivityMonitor\\": "src/"
+        }
+    },
     "require": {}
 }
