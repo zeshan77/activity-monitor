@@ -19,8 +19,8 @@ class CreateActivitiesTable extends Migration
             $table->unsignedInteger('subject_id');
             $table->string('type', 50);
             $table->string('subject_type');
-            $table->text('before')->nullable();
-            $table->text('after');
+            $table->text('old')->nullable();
+            $table->text('new');
             $table->timestamps();
         });
     }
