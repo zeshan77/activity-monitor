@@ -30,33 +30,31 @@ trait RecordsActivity
     protected function recordActivity($event)
     {
 
-        $after = $this->getDirty();
-        $before = [];
+        $new = $this->getDirty();
+        $old = [];
         foreach ($this->getDirty() as $field => $value) {
-
-            $before[$field] = $this->getOriginal($field);
-
+            $old[$field] = $this->getOriginal($field);
         }
 
         if($this->dontLogFields) {
             foreach ($this->dontLogFields as $field) {
-                if (array_key_exists($field, $before)) unset($before[$field]);
-                if (array_key_exists($field, $after)) unset($after[$field]);
+                if (array_key_exists($field, $old)) unset($old[$field]);
+                if (array_key_exists($field, $new)) unset($new[$field]);
             }
         }
 
-        $after = json_encode($after);
-        $before = json_encode($before);
+        $new = json_encode($new);
+        $old = json_encode($old);
         
         if(strpos($this->getActivityType($event), 'created') !== false) {
-            $before = null;
+            $old = null;
         }
         
         $this->activity()->create([
             'user_id' => auth()->id(),
             'type' => $this->getActivityType($event),
-            'before' => $before,
-            'after' => $after
+            'old' => $old,
+            'new' => $new
         ]);
     }
 
