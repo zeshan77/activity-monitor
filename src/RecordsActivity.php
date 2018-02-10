@@ -4,6 +4,7 @@ namespace Zeshan77\ActivityMonitor;
 
 trait RecordsActivity
 {
+    protected $dontLogFields = ['created_at', 'updated_at', 'id'];
 
     protected static function bootRecordsActivity()
     {
@@ -46,7 +47,11 @@ trait RecordsActivity
 
         $after = json_encode($after);
         $before = json_encode($before);
-
+        
+        if(strpos($this->getActivityType($event), 'created') !== false) {
+            $before = null;
+        }
+        
         $this->activity()->create([
             'user_id' => auth()->id(),
             'type' => $this->getActivityType($event),
